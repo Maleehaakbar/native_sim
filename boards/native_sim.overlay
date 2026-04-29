@@ -1,0 +1,11 @@
+
+
+
+&sdl_dc {
+	compatible = "zephyr,sdl-dc";  /*native sim is a simulator , also provide sdl as display similar to ssd1306 in hardware*/
+	height = <272>;
+	width = <480>;
+};
+
+
+
