@@ -22,4 +22,14 @@ as a file
 Images stored as files are not linked into the resulting executable, and must be read into RAM before being drawn. As a result, they are not as resource-friendly as images linked at compile time. However, they are easier to replace without needing to rebuild the main program
 
 2. convert image to c array to use in lvgl code
+3. to convert c code to ediatable pixels, for watchfaces use kotlin script
+    for general image, use AI to remove text
+
+    use claude ai , better responses
+
+
+
+/*today task, design watchfaces and display with lvgl */ 
+
+via figma plugin , xml not preview, and data bindings are not valid
 

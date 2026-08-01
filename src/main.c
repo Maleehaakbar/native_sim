@@ -7,9 +7,11 @@
 #include <time.h>
 
 #include "watchface.h"
-
+#include "../lvgl_export/ui.h"
+#include <zephyr/logging/log.h>
 
 static const int32_t sleep_time_ms = 1000;  
+LOG_MODULE_REGISTER(my_app_module, LOG_LEVEL_INF);
 
 int main(void)
 {       
@@ -17,6 +19,10 @@ int main(void)
     static char buf[25] = {0};
     const struct device *display;
     lv_obj_t *timer_label;
+
+    lv_mem_monitor_t mon;
+    lv_mem_monitor(&mon);
+
 
     display  = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
     if (!device_is_ready(display)) {
@@ -30,14 +36,25 @@ int main(void)
 	if (ret < 0 && ret != -ENOSYS) {
 		printk("Failed to turn blanking off (error %d)", ret);
 		return 0;
-	}
-    
-   // timer_label =  lv_label_create(lv_scr_act());
-   lv_obj_t *watchface_img = lv_img_create(lv_scr_act());
-   lv_img_set_src(watchface_img, &watchface);
-   lv_obj_center(watchface_img);
+    }
 
+    LOG_INF("Pool1: total=%zu, used=%zu (%d%%), free_biggest=%zu",
+        mon.total_size, mon.total_size - mon.free_size,
+        mon.used_pct, mon.free_biggest_size);
+	
+    //ui_init("/home/mod/Desktop/nrf/native_sim/lvgl_export/assets");
+    ui_init("A:/home/mod/Desktop/nrf/native_sim/");
     
+    LOG_INF("Pool2: total=%zu, used=%zu (%d%%), free_biggest=%zu",
+        mon.total_size, mon.total_size - mon.free_size,
+        mon.used_pct, mon.free_biggest_size);
+  
+    lv_screen_load(figma_design_watchface_create());
+    
+    LOG_INF("Pool3: total=%zu, used=%zu (%d%%), free_biggest=%zu",
+        mon.total_size, mon.total_size - mon.free_size,
+        mon.used_pct, mon.free_biggest_size);
+
     lv_timer_handler(); 
 
     // Do forever
@@ -63,5 +80,11 @@ int main(void)
         // Sleep
         k_msleep(sleep_time_ms);
     }
+
 }
 
+
+
+/*cant find lv_translation in v9.3 in github adn my downloads but found in documentation*/
+
+/* try generated integrate code directly from vscode lvgl example*/
