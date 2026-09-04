@@ -6,22 +6,26 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "watchface.h"
-#include "../lvgl_export/ui.h"
+#include "../lvgl_watch_export/ui.h"
 #include <zephyr/logging/log.h>
+ #include <lvgl_private.h>
+
 
 static const int32_t sleep_time_ms = 1000;  
 LOG_MODULE_REGISTER(my_app_module, LOG_LEVEL_INF);
+
+struct sys_memory_stats stat;
 
 int main(void)
 {       
     int ret;
     static char buf[25] = {0};
     const struct device *display;
-    lv_obj_t *timer_label;
 
-    lv_mem_monitor_t mon;
-    lv_mem_monitor(&mon);
+    
+
+   // lv_obj_t *screen1 = figma_design_watchface_create();
+    //lv_obj_t *screen2 = watchface_create();
 
 
     display  = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
@@ -38,29 +42,22 @@ int main(void)
 		return 0;
     }
 
-    LOG_INF("Pool1: total=%zu, used=%zu (%d%%), free_biggest=%zu",
-        mon.total_size, mon.total_size - mon.free_size,
-        mon.used_pct, mon.free_biggest_size);
-	
-    //ui_init("/home/mod/Desktop/nrf/native_sim/lvgl_export/assets");
-    ui_init("A:/home/mod/Desktop/nrf/native_sim/");
     
-    LOG_INF("Pool2: total=%zu, used=%zu (%d%%), free_biggest=%zu",
-        mon.total_size, mon.total_size - mon.free_size,
-        mon.used_pct, mon.free_biggest_size);
-  
-    lv_screen_load(figma_design_watchface_create());
-    
-    LOG_INF("Pool3: total=%zu, used=%zu (%d%%), free_biggest=%zu",
-        mon.total_size, mon.total_size - mon.free_size,
-        mon.used_pct, mon.free_biggest_size);
+   // ui_init("A:/home/mod/Desktop/nrf/native_sim/");
+    ui_init("");
+    lv_screen_load(watchface_create());
 
+    lv_sysmon_show_memory(NULL);
+    lv_sysmon_show_performance(NULL);
+  
     lv_timer_handler(); 
+
+   
 
     // Do forever
    while (1) {
 
-       /* time_t now = time(NULL);
+        time_t now = time(NULL);
 
         struct tm *tm_info = localtime(&now);
          printf("Time: %02d : %02d : %02d\n",
@@ -70,13 +67,11 @@ int main(void)
         sprintf(buf, " %02d : %02d : %02d\n", tm_info->tm_hour,
                tm_info->tm_min,
                tm_info->tm_sec);
-         lv_label_set_text(timer_label,buf);
-    
-         lv_obj_align(timer_label, LV_ALIGN_TOP_MID, 0, 5);*/
+        lv_subject_copy_string(&dsiplay_time, buf);
 
         // Must be called periodically
         lv_timer_handler();
-
+       
         // Sleep
         k_msleep(sleep_time_ms);
     }
@@ -88,3 +83,5 @@ int main(void)
 /*cant find lv_translation in v9.3 in github adn my downloads but found in documentation*/
 
 /* try generated integrate code directly from vscode lvgl example*/
+
+/*todo: check how to update week*/

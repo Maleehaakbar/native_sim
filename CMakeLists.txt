@@ -7,18 +7,21 @@ zephyr_compile_definitions(_DEFAULT_SOURCE)
 target_include_directories(app PRIVATE 
                         lvgl_export)
 
-target_compile_definitions(app PRIVATE
-  LV_USE_TINY_TTF=1
-  LV_USE_TRANSLATION=1
-)
-
 target_sources(app PRIVATE src/main.c
-                            src/watchface.c
-                            lvgl_export/container_gen.c
-                            lvgl_export/label_gen.c
-                            lvgl_export/image_gen.c
-                            lvgl_export/panel_gen.c
-                            lvgl_export/ui_gen.c
-                            lvgl_export/figma_design_watchface_gen.c
-                            lvgl_export/ui.c
-                            lvgl_export/img_58546e68_data.c)
+                            lvgl_watch_export/card_gen.c
+                            lvgl_watch_export/container_gen.c
+                            lvgl_watch_export/label_gen.c
+                            lvgl_watch_export/image_gen.c
+                            lvgl_watch_export/panel_gen.c
+                            lvgl_watch_export/figma_design_watchface_gen.c
+                            lvgl_watch_export/watchface_gen.c
+                            lvgl_watch_export/ui_gen.c
+                            lvgl_watch_export/ui.c
+                            lvgl_watch_export/images/img_58546e68_data.c
+                            lvgl_watch_export/images/vec_48_15_data.c
+                            fonts/font_inter_medium_16_data.c
+                            fonts/font_inter_regular_10_data.c
+                            fonts/font_inter_regular_21_data.c
+                            fonts/font_inter_semi_bold_48_data.c
+                            fonts/font_inter_semi_bold_69_data.c
+                            )

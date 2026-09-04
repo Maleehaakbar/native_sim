@@ -1,9 +1,9 @@
 /**
- * @file panel_gen.h
+ * @file watchface_gen.h
  */
 
-#ifndef PANEL_H
-#define PANEL_H
+#ifndef WATCHFACE_H
+#define WATCHFACE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,7 +17,7 @@ extern "C" {
     #include "lvgl.h"
     #include "lvgl_private.h"
 #else
-     #include <lvgl.h>
+    #include <lvgl.h>
     #include <lvgl_private.h>
 #endif
 
@@ -37,7 +37,9 @@ extern "C" {
  * GLOBAL PROTOTYPES
  **********************/
 
-lv_obj_t * panel_create(lv_obj_t * parent);
+
+
+lv_obj_t * watchface_create(void);
 
 /**********************
  *      MACROS
@@ -47,4 +49,4 @@ lv_obj_t * panel_create(lv_obj_t * parent);
 } /*extern "C"*/
 #endif
 
-#endif /*PANEL_H*/
+#endif /*WATCHFACE_H*/

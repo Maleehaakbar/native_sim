@@ -3,9 +3,18 @@
 
 &sdl_dc {
 	compatible = "zephyr,sdl-dc";  /*native sim is a simulator , also provide sdl as display similar to ssd1306 in hardware*/
-	height = <272>;
-	width = <480>;
+	height = <240>;
+	width = <240>;
 };
+
+&uart0 {
+
+	compatible = "zephyr,native-pty-uart";
+		/* Dummy current-speed entry to comply with serial
+		 * DTS binding
+		 */
+	current-speed = <0>;
+	};
 
 
 

@@ -40,7 +40,7 @@ lv_obj_t * figma_design_watchface_create(void)
     #if UI_CHECK_COMPILE_TARGET(UI_TARGET_ALL)
     if (ui_check_target(UI_TARGET_ALL)) {
         lv_obj_t * lv_obj_0 = lv_obj_create(NULL);
-        lv_obj_set_name_static(lv_obj_0, "figma_design_watchface_#");
+      //  lv_obj_set_name_static(lv_obj_0, "figma_design_watchface_#");
         lv_obj_set_style_bg_color(lv_obj_0, lv_color_hex(0x000000), 0);
         lv_obj_set_style_bg_opa(lv_obj_0, 0, 0);
         lv_obj_set_flag(lv_obj_0, LV_OBJ_FLAG_SCROLLABLE, false);
@@ -74,7 +74,7 @@ lv_obj_t * figma_design_watchface_create(void)
         lv_obj_set_align(label_0, LV_ALIGN_BOTTOM_RIGHT);
         lv_obj_set_x(label_0, -29);
         lv_obj_set_y(label_0, -141);
-        lv_obj_set_height(label_0, 61);
+        lv_obj_set_height(label_0, 65);
         lv_label_bind_text(label_0, &time_variable, NULL);
         lv_obj_set_style_text_font(label_0, font_inter_semi_bold_69, 0);
         lv_obj_set_style_text_color(label_0, lv_color_hex(0xE5E9E5), 0);

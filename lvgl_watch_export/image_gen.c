@@ -1,5 +1,5 @@
 /**
- * @file panel_gen.c
+ * @file image_gen.c
  * @brief Template source file for LVGL objects
  */
 
@@ -7,7 +7,7 @@
  *      INCLUDES
  *********************/
 
-#include "panel_gen.h"
+#include "image_gen.h"
 #include "ui.h"
 
 /*********************
@@ -30,19 +30,20 @@
  *   GLOBAL FUNCTIONS
  **********************/
 
-lv_obj_t * panel_create(lv_obj_t * parent)
+lv_obj_t * image_create(lv_obj_t * parent)
 {
     LV_TRACE_OBJ_CREATE("begin");
 
-    static lv_style_t style_filled;
+    static lv_style_t style_base;
 
     static bool style_inited = false;
 
     if (!style_inited) {
         #if UI_CHECK_COMPILE_TARGET(UI_TARGET_ALL)
         if (ui_check_target(UI_TARGET_ALL)) {
-            lv_style_init(&style_filled);
-            lv_style_set_bg_opa(&style_filled, (255 * 100 / 100));
+            lv_style_init(&style_base);
+            lv_style_set_width(&style_base, LV_SIZE_CONTENT);
+            lv_style_set_height(&style_base, LV_SIZE_CONTENT);
 
         }
         #endif
@@ -54,12 +55,13 @@ lv_obj_t * panel_create(lv_obj_t * parent)
 
     #if UI_CHECK_COMPILE_TARGET(UI_TARGET_ALL)
     if (ui_check_target(UI_TARGET_ALL)) {
-        lv_obj_t * container_0 = container_create(parent);
-        lv_obj_set_name_static(container_0, "panel_#");
+        lv_obj_t * lv_image_0 = lv_image_create(parent);
+      //  lv_obj_set_name_static(lv_image_0, "image_#");
 
-        lv_obj_add_style(container_0, &style_filled, 0);
+        lv_obj_remove_style_all(lv_image_0);
+        lv_obj_add_style(lv_image_0, &style_base, 0);
 
-        the_root = container_0;
+        the_root = lv_image_0;
     }
     #endif
 

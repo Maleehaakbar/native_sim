@@ -57,7 +57,7 @@ lv_obj_t * label_create(lv_obj_t * parent)
     #if UI_CHECK_COMPILE_TARGET(UI_TARGET_ALL)
     if (ui_check_target(UI_TARGET_ALL)) {
         lv_obj_t * lv_label_0 = lv_label_create(parent);
-        lv_obj_set_name_static(lv_label_0, "label_#");
+       // lv_obj_set_name_static(lv_label_0, "label_#");
 
         lv_obj_add_style(lv_label_0, &style_base, 0);
 

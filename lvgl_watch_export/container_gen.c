@@ -63,7 +63,7 @@ lv_obj_t * container_create(lv_obj_t * parent)
     #if UI_CHECK_COMPILE_TARGET(UI_TARGET_ALL)
     if (ui_check_target(UI_TARGET_ALL)) {
         lv_obj_t * lv_obj_0 = lv_obj_create(parent);
-        lv_obj_set_name_static(lv_obj_0, "container_#");
+      //  lv_obj_set_name_static(lv_obj_0, "container_#");
         lv_obj_set_flag(lv_obj_0, LV_OBJ_FLAG_SCROLLABLE, false);
 
         lv_obj_remove_style_all(lv_obj_0);

@@ -83,6 +83,9 @@ extern lv_style_t screen_base;
  *----------------*/
 
 /* Targets: any */
+extern lv_font_t * font_inter_regular_10;
+extern lv_font_t * font_inter_semi_bold_48;
+extern lv_font_t * font_inter_medium_16;
 extern lv_font_t * font_inter_semi_bold_69;
 extern lv_font_t * font_inter_regular_21;
 
@@ -93,12 +96,15 @@ extern lv_font_t * font_inter_regular_21;
 
 /* Targets: any */
 extern const void * img_58546e68;
+extern const void * vec_48_15;
 
 /*----------------
  * Subjects
  *----------------*/
 
 extern lv_subject_t date_week;
+extern lv_subject_t display_date;
+extern lv_subject_t dsiplay_time;
 extern lv_subject_t time_variable;
 
 /**********************
@@ -124,11 +130,13 @@ void ui_init_gen(const char * asset_path);
  **********************/
 
 /*Include all the widgets, components and screens of this library*/
+#include "card_gen.h"
 #include "container_gen.h"
 #include "image_gen.h"
 #include "label_gen.h"
 #include "panel_gen.h"
 #include "figma_design_watchface_gen.h"
+#include "watchface_gen.h"
 
 #ifdef __cplusplus
 } /*extern "C"*/
