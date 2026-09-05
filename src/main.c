@@ -8,11 +8,15 @@
 
 #include "../lvgl_watch_export/ui.h"
 #include <zephyr/logging/log.h>
- #include <lvgl_private.h>
+#include <lvgl_private.h>
+#include "app_create.h"
 
 
 static const int32_t sleep_time_ms = 1000;  
 LOG_MODULE_REGISTER(my_app_module, LOG_LEVEL_INF);
+
+
+lv_obj_t* watchface;
 
 struct sys_memory_stats stat;
 
@@ -45,14 +49,23 @@ int main(void)
     
    // ui_init("A:/home/mod/Desktop/nrf/native_sim/");
     ui_init("");
-    lv_screen_load(watchface_create());
+
+    //create watchfacescreen
+    watchface = watchface_create();  
+      
+    //create menu screen(screen2)
+    create_menu_screen();      
+
+    //create menu button(on main screen)
+    create_menu_button(watchface);     
+    
+    //load watchface screen/main screen
+    lv_screen_load(watchface);    
 
     lv_sysmon_show_memory(NULL);
     lv_sysmon_show_performance(NULL);
-  
     lv_timer_handler(); 
 
-   
 
     // Do forever
    while (1) {
@@ -80,8 +93,6 @@ int main(void)
 
 
 
-/*cant find lv_translation in v9.3 in github adn my downloads but found in documentation*/
 
-/* try generated integrate code directly from vscode lvgl example*/
 
-/*todo: check how to update week*/
+/*todo: check how to update weekdays*/

@@ -8,6 +8,7 @@ target_include_directories(app PRIVATE
                         lvgl_export)
 
 target_sources(app PRIVATE src/main.c
+                           src/app_create.c
                             lvgl_watch_export/card_gen.c
                             lvgl_watch_export/container_gen.c
                             lvgl_watch_export/label_gen.c
