@@ -3,5 +3,6 @@
 
 void create_menu_screen();
 void create_menu_button(lv_obj_t *parent);
+void init_main_screen(void);
 
 #endif

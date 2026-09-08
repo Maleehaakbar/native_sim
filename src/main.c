@@ -26,12 +26,6 @@ int main(void)
     static char buf[25] = {0};
     const struct device *display;
 
-    
-
-   // lv_obj_t *screen1 = figma_design_watchface_create();
-    //lv_obj_t *screen2 = watchface_create();
-
-
     display  = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
     if (!device_is_ready(display)) {
         printk("Error: display not ready\r\n");
@@ -46,29 +40,25 @@ int main(void)
 		return 0;
     }
 
-    
-   // ui_init("A:/home/mod/Desktop/nrf/native_sim/");
+    /*init generated ui*/
     ui_init("");
 
-    //create watchfacescreen
+    /*create watchfacescreen*/
     watchface = watchface_create();  
-      
-    //create menu screen(screen2)
-    create_menu_screen();      
-
-    //create menu button(on main screen)
-    create_menu_button(watchface);     
     
-    //load watchface screen/main screen
-    lv_screen_load(watchface);    
+     /*create menu screen(screen2)*/
+    create_menu_screen();   
+    
+    /*initialize main screen content*/
+    init_main_screen();
 
+    /*show memory usage*/
     lv_sysmon_show_memory(NULL);
     lv_sysmon_show_performance(NULL);
+
     lv_timer_handler(); 
 
-
-    // Do forever
-   while (1) {
+    while (1) {
 
         time_t now = time(NULL);
 
@@ -80,12 +70,15 @@ int main(void)
         sprintf(buf, " %02d : %02d : %02d\n", tm_info->tm_hour,
                tm_info->tm_min,
                tm_info->tm_sec);
-        lv_subject_copy_string(&dsiplay_time, buf);
 
-        // Must be called periodically
+        /*TODO : make time variable same for each watchface*/
+        lv_subject_copy_string(&dsiplay_time, buf);
+        lv_subject_copy_string(&time_variable, buf);
+
+        /*Must be called periodically*/
         lv_timer_handler();
        
-        // Sleep
+        /*Sleep*/
         k_msleep(sleep_time_ms);
     }
 
